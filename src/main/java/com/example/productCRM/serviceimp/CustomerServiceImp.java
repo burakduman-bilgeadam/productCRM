@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
-    private List<Customer> customerList=new ArrayList<>();
+    public static List<Customer> customerList=new ArrayList<>();
     @Override
     public void addCustomer(Customer customer){
         this.customerList.add(customer);
