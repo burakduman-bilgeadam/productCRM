@@ -1,6 +1,6 @@
 package com.example.productCRM.controller;
 
-import com.example.productCRM.model.Sale;
+import com.example.productCRM.model.SaleDTO;
 import com.example.productCRM.model.SaleRequestDTO;
 import com.example.productCRM.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SaleController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Sale>> getSales(){
+    public ResponseEntity<List<SaleDTO>> getSales(){
         return new ResponseEntity
                 (this.saleService.getSales(),HttpStatus.OK);
     }

@@ -1,6 +1,6 @@
 package com.example.productCRM.serviceimp;
 
-import com.example.productCRM.model.Customer;
+import com.example.productCRM.model.CustomerDTO;
 import com.example.productCRM.service.CustomerService;
 import org.springframework.stereotype.Service;
 
@@ -9,30 +9,30 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
-    public static List<Customer> customerList=new ArrayList<>();
+    public static List<CustomerDTO> customerDTOList =new ArrayList<>();
     @Override
-    public void addCustomer(Customer customer){
-        this.customerList.add(customer);
+    public void addCustomer(CustomerDTO customerDTO){
+        this.customerDTOList.add(customerDTO);
     }
     @Override
     public void deleteCustomer(Long id){
-        Customer c = this.customerList.stream()
+        CustomerDTO c = this.customerDTOList.stream()
                 .filter(customer -> customer.getId()==id)
                 .findFirst().orElse(null);
-        customerList.remove(c);
+        customerDTOList.remove(c);
     }
     @Override
-    public void updateCustomer(Customer customer){
-        Customer cus = this.customerList.stream()
-                .filter(c -> c.getId()==customer.getId())
+    public void updateCustomer(CustomerDTO customerDTO){
+        CustomerDTO cus = this.customerDTOList.stream()
+                .filter(c -> c.getId()== customerDTO.getId())
                 .findFirst().orElse(null);
-        cus.setAge(customer.getAge());
-        cus.setName(customer.getName());
-        cus.setSurname(customer.getSurname());
+        cus.setAge(customerDTO.getAge());
+        cus.setName(customerDTO.getName());
+        cus.setSurname(customerDTO.getSurname());
     }
 
     @Override
-    public List<Customer> getCustomerList(){
-        return this.customerList;
+    public List<CustomerDTO> getCustomerList(){
+        return this.customerDTOList;
     }
 }

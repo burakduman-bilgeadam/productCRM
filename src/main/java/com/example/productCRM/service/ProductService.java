@@ -1,12 +1,12 @@
 package com.example.productCRM.service;
 
-import com.example.productCRM.model.Product;
+import com.example.productCRM.model.ProductDTO;
 
 import java.util.List;
 
 public interface ProductService {
-    void addProduct(Product product);
+    void addProduct(ProductDTO productDTO);
     void deleteProduct(Long id);
-    void updateProduct(Product product);
-    List<Product> getProductList();
+    void updateProduct(ProductDTO productDTO);
+    List<ProductDTO> getProductList();
 }

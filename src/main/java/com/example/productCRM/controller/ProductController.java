@@ -1,6 +1,6 @@
 package com.example.productCRM.controller;
 
-import com.example.productCRM.model.Product;
+import com.example.productCRM.model.ProductDTO;
 import com.example.productCRM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,16 +15,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @PostMapping("/add")
-    public ResponseEntity addProduct(@RequestBody Product product){
-        this.productService.addProduct(product);
+    public ResponseEntity addProduct(@RequestBody ProductDTO productDTO){
+        this.productService.addProduct(productDTO);
         return new ResponseEntity
                 ("Başarılı", HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity updateProduct
-            (@RequestBody Product product){
-        this.productService.updateProduct(product);
+            (@RequestBody ProductDTO productDTO){
+        this.productService.updateProduct(productDTO);
         return new ResponseEntity("Başarılı Kayıt",
                 HttpStatus.ACCEPTED);
     }
@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Product>> getListProduct(){
+    public ResponseEntity<List<ProductDTO>> getListProduct(){
        return ResponseEntity.ok(
                this.productService.getProductList());
     }

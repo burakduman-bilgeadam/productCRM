@@ -1,6 +1,6 @@
 package com.example.productCRM.serviceimp;
 
-import com.example.productCRM.model.Product;
+import com.example.productCRM.model.ProductDTO;
 import com.example.productCRM.service.ProductService;
 import org.springframework.stereotype.Service;
 
@@ -9,35 +9,35 @@ import java.util.List;
 
 @Service
 public class ProductServiceImp implements ProductService {
-    public static List<Product> productList = new ArrayList<>();
+    public static List<ProductDTO> productDTOList = new ArrayList<>();
     @Override
-    public void addProduct(Product product) {
-        this.productList.add(product);
+    public void addProduct(ProductDTO productDTO) {
+        this.productDTOList.add(productDTO);
     }
 
     @Override
     public void deleteProduct(Long id) {
-        Product p = this.productList.stream()
+        ProductDTO p = this.productDTOList.stream()
                 .filter(product -> product.getId()==id)
                 .findFirst().orElse(null);
         if(p!=null){
-            productList.remove(p);
+            productDTOList.remove(p);
         }
     }
 
     @Override
-    public void updateProduct(Product product) {
-        Product p = this.productList.stream()
-                .filter(pr -> pr.getId()==product.getId())
+    public void updateProduct(ProductDTO productDTO) {
+        ProductDTO p = this.productDTOList.stream()
+                .filter(pr -> pr.getId()== productDTO.getId())
                 .findFirst().orElse(null);
         if(p!=null){
-            p.setName(product.getName());
-            p.setPrice(product.getPrice());
+            p.setName(productDTO.getName());
+            p.setPrice(productDTO.getPrice());
         }
     }
 
     @Override
-    public List<Product> getProductList() {
-        return this.productList;
+    public List<ProductDTO> getProductList() {
+        return this.productDTOList;
     }
 }

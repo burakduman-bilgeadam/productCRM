@@ -1,8 +1,8 @@
 package com.example.productCRM.serviceimp;
 
-import com.example.productCRM.model.Customer;
-import com.example.productCRM.model.Product;
-import com.example.productCRM.model.Sale;
+import com.example.productCRM.model.CustomerDTO;
+import com.example.productCRM.model.ProductDTO;
+import com.example.productCRM.model.SaleDTO;
 import com.example.productCRM.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,45 +17,45 @@ public class SaleServiceImp implements SaleService {
     @Autowired
     private ProductServiceImp productService;
 
-    private List<Sale> sales = new ArrayList<>();
+    private List<SaleDTO> saleDTOS = new ArrayList<>();
 
     @Override
     public void addSale(Long customerId, Long productId,Long saleId) {
-        Customer c = this.customerService
+        CustomerDTO c = this.customerService
                 .getCustomerList().stream()
                 .filter(customer -> customer.getId() == customerId)
                 .findFirst().orElse(null);
 
-        Product p = this.productService.getProductList().stream()
+        ProductDTO p = this.productService.getProductList().stream()
                 .filter(product -> product.getId() == productId)
                 .findFirst().orElse(null);
-        Sale s = new Sale(saleId,p,c);
-        this.sales.add(s);
+        SaleDTO s = new SaleDTO(saleId,p,c);
+        this.saleDTOS.add(s);
     }
 
     @Override
     public void deleteSale(Long id) {
-        Sale s = this.sales.stream()
-                .filter(sale -> sale.getId() == id)
+        SaleDTO s = this.saleDTOS.stream()
+                .filter(saleDTO -> saleDTO.getId() == id)
                 .findFirst().orElse(null);
         if(s!=null){
-            this.sales.remove(s);
+            this.saleDTOS.remove(s);
         }
     }
 
     @Override
     public void updateSale(Long customerId, Long productId,Long saleId) {
-        Customer c = this.customerService
+        CustomerDTO c = this.customerService
                 .getCustomerList().stream()
                 .filter(customer -> customer.getId() == customerId)
                 .findFirst().orElse(null);
 
-        Product p = this.productService.getProductList().stream()
+        ProductDTO p = this.productService.getProductList().stream()
                 .filter(product -> product.getId() == productId)
                 .findFirst().orElse(null);
 
-        Sale s = this.sales.stream()
-                .filter(sale -> sale.getId() == saleId)
+        SaleDTO s = this.saleDTOS.stream()
+                .filter(saleDTO -> saleDTO.getId() == saleId)
                 .findFirst().orElse(null);
         if(s!=null){
             s.setCustomer(c);
@@ -64,7 +64,7 @@ public class SaleServiceImp implements SaleService {
     }
 
     @Override
-    public List<Sale> getSales() {
-        return this.sales;
+    public List<SaleDTO> getSales() {
+        return this.saleDTOS;
     }
 }

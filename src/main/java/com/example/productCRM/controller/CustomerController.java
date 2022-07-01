@@ -1,6 +1,6 @@
 package com.example.productCRM.controller;
 
-import com.example.productCRM.model.Customer;
+import com.example.productCRM.model.CustomerDTO;
 import com.example.productCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +17,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity addCustomer(@RequestBody Customer customer){
-        this.customerService.addCustomer(customer);
+    public ResponseEntity addCustomer(@RequestBody CustomerDTO customerDTO){
+        this.customerService.addCustomer(customerDTO);
         return new ResponseEntity
                 ("Başarılı",HttpStatus.CREATED);
     }
@@ -30,11 +30,11 @@ public class CustomerController {
     }
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateCustomer(@RequestBody Customer customer){
-        this.customerService.updateCustomer(customer);
+    public void updateCustomer(@RequestBody CustomerDTO customerDTO){
+        this.customerService.updateCustomer(customerDTO);
     }
     @GetMapping
-    public List<Customer> getCustomerList(){
+    public List<CustomerDTO> getCustomerList(){
         return this.customerService.getCustomerList();
     }
 }

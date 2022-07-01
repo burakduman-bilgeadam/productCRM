@@ -1,6 +1,6 @@
 package com.example.productCRM.model;
 
-public class Product {
+public class ProductDTO {
     private Long id;
     private String name;
     private Double price;
@@ -29,19 +29,19 @@ public class Product {
         this.price = price;
     }
 
-    public Product(Long id, String name, Double price) {
+    public ProductDTO(Long id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Product(){
+    public ProductDTO(){
 
     }
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
