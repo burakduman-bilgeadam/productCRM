@@ -6,6 +6,7 @@ import com.example.productCRM.repository.CustomerRepository;
 import com.example.productCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,6 @@ import java.util.List;
 public class CustomerServiceImp implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
-    public static List<CustomerDTO> customerDTOList =new ArrayList<>();
     @Override
     public void addCustomer(CustomerDTO customerDTO){
         Customer customer = new Customer();
