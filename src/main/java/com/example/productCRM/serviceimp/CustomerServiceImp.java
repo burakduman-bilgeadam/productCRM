@@ -6,7 +6,7 @@ import com.example.productCRM.repository.CustomerRepository;
 import com.example.productCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +18,7 @@ public class CustomerServiceImp implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
     @Override
+    @Transactional
     public void addCustomer(CustomerDTO customerDTO){
         Customer customer = new Customer();
         customer.setAge(customerDTO.getAge());
@@ -27,10 +28,12 @@ public class CustomerServiceImp implements CustomerService {
         customerRepository.save(customer);
     }
     @Override
+    @Transactional
     public void deleteCustomer(Long id){
         customerRepository.deleteById(id);
     }
     @Override
+    @Transactional
     public void updateCustomer(CustomerDTO customerDTO){
         //TODO: ilk kayıtı bulalım
         Customer customer = new Customer();
@@ -42,6 +45,7 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CustomerDTO> getCustomerList(){
         List<CustomerDTO> customerDTOS = new ArrayList<>();
         Iterator<Customer> customerIterator=

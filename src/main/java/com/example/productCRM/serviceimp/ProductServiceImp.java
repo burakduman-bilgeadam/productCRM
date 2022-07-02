@@ -6,6 +6,7 @@ import com.example.productCRM.repository.ProductRepository;
 import com.example.productCRM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Override
+    @Transactional
     public void addProduct(ProductDTO productDTO) {
         Product product = new Product();
         product.setName(productDTO.getName());
@@ -26,11 +28,13 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void updateProduct(ProductDTO productDTO) {
         Product product = new Product();
         product.setName(productDTO.getName());
@@ -40,6 +44,7 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDTO> getProductList() {
         List<ProductDTO>productDTOs = new ArrayList<>();
         Iterator<Product> productIterator =
