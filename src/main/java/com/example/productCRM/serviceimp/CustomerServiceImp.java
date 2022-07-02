@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -27,27 +28,32 @@ public class CustomerServiceImp implements CustomerService {
     }
     @Override
     public void deleteCustomer(Long id){
-        /*CustomerDTO c = this.customerDTOList.stream()
-                .filter(customer -> customer.getId()==id)
-                .findFirst().orElse(null);
-        customerDTOList.remove(c);
-         */
+        customerRepository.deleteById(id);
     }
     @Override
     public void updateCustomer(CustomerDTO customerDTO){
-        CustomerDTO cus =null;
-                /*this.customerDTOList.stream()
-                .filter(c -> c.getId()== customerDTO.getId())
-                .findFirst().orElse(null);
-
-                 */
-        cus.setAge(customerDTO.getAge());
-        cus.setName(customerDTO.getName());
-        cus.setSurname(customerDTO.getSurname());
+        //TODO: ilk kayıtı bulalım
+        Customer customer = new Customer();
+        customer.setAge(customerDTO.getAge());
+        customer.setName(customerDTO.getName());
+        customer.setSurname(customerDTO.getSurname());
+        customer.setId(customerDTO.getId());
+        customerRepository.save(customer);
     }
 
     @Override
     public List<CustomerDTO> getCustomerList(){
-        return this.customerDTOList;
+        List<CustomerDTO> customerDTOS = new ArrayList<>();
+        Iterator<Customer> customerIterator=
+                customerRepository.findAll().iterator();
+        while(customerIterator.hasNext()){
+            CustomerDTO customerDTO = new CustomerDTO();
+            Customer customer = customerIterator.next();
+            customerDTO.setAge(customer.getAge());
+            customerDTO.setName(customer.getName());
+            customerDTO.setSurname(customer.getSurname());
+            customerDTOS.add(customerDTO);
+        }
+        return customerDTOS;
     }
 }
