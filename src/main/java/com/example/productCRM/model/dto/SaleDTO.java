@@ -1,4 +1,4 @@
-package com.example.productCRM.model;
+package com.example.productCRM.model.dto;
 
 public class SaleDTO {
     private Long id;

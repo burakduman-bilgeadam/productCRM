@@ -1,6 +1,6 @@
 package com.example.productCRM.controller;
 
-import com.example.productCRM.model.ProductDTO;
+import com.example.productCRM.model.dto.ProductDTO;
 import com.example.productCRM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

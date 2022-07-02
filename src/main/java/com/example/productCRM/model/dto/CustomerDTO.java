@@ -1,18 +1,9 @@
-package com.example.productCRM.model;
+package com.example.productCRM.model.dto;
 
 public class CustomerDTO {
-    private Long id;
     private String name;
     private String surname;
     private Integer age;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -38,8 +29,7 @@ public class CustomerDTO {
         this.age = age;
     }
 
-    public CustomerDTO(Long id, String name, String surname, Integer age) {
-        this.id = id;
+    public CustomerDTO(String name, String surname, Integer age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -50,7 +40,6 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +

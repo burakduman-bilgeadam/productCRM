@@ -1,14 +1,16 @@
 package com.example.productCRM.model.entity;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name="customer_2")
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name="customer")
+public class Customer extends BaseEntity {
+    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
+    @SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
+    */
 
     @Column(name="name")
     private String name;
@@ -16,14 +18,6 @@ public class Customer {
     private String surname;
     @Column(name="birth_date")
     private Integer age;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

@@ -1,6 +1,6 @@
 package com.example.productCRM.service;
 
-import com.example.productCRM.model.CustomerDTO;
+import com.example.productCRM.model.dto.CustomerDTO;
 
 import java.util.List;
 

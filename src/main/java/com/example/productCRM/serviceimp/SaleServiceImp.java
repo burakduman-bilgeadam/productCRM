@@ -1,8 +1,8 @@
 package com.example.productCRM.serviceimp;
 
-import com.example.productCRM.model.CustomerDTO;
-import com.example.productCRM.model.ProductDTO;
-import com.example.productCRM.model.SaleDTO;
+import com.example.productCRM.model.dto.CustomerDTO;
+import com.example.productCRM.model.dto.ProductDTO;
+import com.example.productCRM.model.dto.SaleDTO;
 import com.example.productCRM.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +21,11 @@ public class SaleServiceImp implements SaleService {
 
     @Override
     public void addSale(Long customerId, Long productId,Long saleId) {
-        CustomerDTO c = this.customerService
+        CustomerDTO c = null;
+        /*this.customerService
                 .getCustomerList().stream()
                 .filter(customer -> customer.getId() == customerId)
-                .findFirst().orElse(null);
+                .findFirst().orElse(null);*/
 
         ProductDTO p = this.productService.getProductList().stream()
                 .filter(product -> product.getId() == productId)
@@ -45,10 +46,11 @@ public class SaleServiceImp implements SaleService {
 
     @Override
     public void updateSale(Long customerId, Long productId,Long saleId) {
-        CustomerDTO c = this.customerService
+        CustomerDTO c = null;
+        /*this.customerService
                 .getCustomerList().stream()
                 .filter(customer -> customer.getId() == customerId)
-                .findFirst().orElse(null);
+                .findFirst().orElse(null);*/
 
         ProductDTO p = this.productService.getProductList().stream()
                 .filter(product -> product.getId() == productId)

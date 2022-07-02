@@ -1,6 +1,6 @@
 package com.example.productCRM.serviceimp;
 
-import com.example.productCRM.model.ProductDTO;
+import com.example.productCRM.model.dto.ProductDTO;
 import com.example.productCRM.service.ProductService;
 import org.springframework.stereotype.Service;
 
