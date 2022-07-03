@@ -15,4 +15,6 @@ public interface CustomerService {
 
     long getAllCountInCustomer();
     void addListCustomer(List<CustomerDTO> customerDTOList);
+
+    List<CustomerDTO> getCustomerByName(String name);
  }

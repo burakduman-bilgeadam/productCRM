@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product,Long> {
+//name e göre sorgu
+    //name veya price a göre sorgu
+
 }

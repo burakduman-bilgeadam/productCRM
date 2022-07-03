@@ -4,7 +4,7 @@ import com.example.productCRM.model.dto.CustomerDTO;
 import com.example.productCRM.model.entity.Customer;
 import com.example.productCRM.repository.CustomerRepository;
 import com.example.productCRM.service.CustomerService;
-import com.example.productCRM.service.utils.ModelMapperUtil;
+import com.example.productCRM.utils.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,6 +65,7 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ResponseEntity<CustomerDTO> getCustomerById(Long id) {
         Boolean isExists = this.customerRepository.existsById(id);
         if(isExists){
@@ -81,11 +82,13 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public long getAllCountInCustomer() {
         return this.customerRepository.count();
     }
 
     @Override
+    @Transactional
     public void addListCustomer(List<CustomerDTO> customerDTOList) {
         List<Customer> customerList = new ArrayList<>();
         for(CustomerDTO customerDTO : customerDTOList){
@@ -97,6 +100,13 @@ public class CustomerServiceImp implements CustomerService {
             customerList.add(customer);
         }
         this.customerRepository.saveAll(customerList);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getCustomerByName(String name){
+        return modelMapperUtil.mapAll(
+                this.customerRepository.findByName(name),CustomerDTO.class);
     }
 
 

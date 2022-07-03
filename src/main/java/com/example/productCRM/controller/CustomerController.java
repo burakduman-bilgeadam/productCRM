@@ -83,4 +83,11 @@ public class CustomerController {
         return new ResponseEntity<>
                 (customerService.getAllCountInCustomer(),HttpStatus.OK);
     }
+
+    @GetMapping("/getByName")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CustomerDTO> getCustomerByName
+            (@RequestParam(name = "name") String name){
+        return this.customerService.getCustomerByName(name);
+    }
 }
