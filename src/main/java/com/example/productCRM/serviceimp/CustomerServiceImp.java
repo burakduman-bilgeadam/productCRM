@@ -50,18 +50,9 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public List<CustomerDTO> getCustomerList(){
-        List<CustomerDTO> customerDTOS = new ArrayList<>();
-        Iterator<Customer> customerIterator=
-                customerRepository.findAll().iterator();
-        while(customerIterator.hasNext()){
-            CustomerDTO customerDTO = new CustomerDTO();
-            Customer customer = customerIterator.next();
-            customerDTO.setAge(customer.getAge());
-            customerDTO.setName(customer.getName());
-            customerDTO.setSurname(customer.getSurname());
-            customerDTOS.add(customerDTO);
-        }
-        return customerDTOS;
+        return this.modelMapperUtil.mapAll(
+                (List<Customer>)this.customerRepository.findAll(),
+                CustomerDTO.class);
     }
 
     @Override
@@ -107,6 +98,69 @@ public class CustomerServiceImp implements CustomerService {
     public List<CustomerDTO> getCustomerByName(String name){
         return modelMapperUtil.mapAll(
                 this.customerRepository.findByName(name),CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getCustomerByNameOrSurname(String name, String surname) {
+        return modelMapperUtil.mapAll(
+                this.customerRepository.findByNameOrSurname(name,surname),
+                CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getDistinctCustomerByName(String name) {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.findDistinctByName(name),CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getGreaterThan40() {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.findByAgeGreaterThan(40),
+                CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getByAgeLessThanEqualAndNameIgnoreCase() {
+        return this.modelMapperUtil.mapAll(this.customerRepository
+                .findByAgeLessThanEqualAndNameIgnoreCase(40,"can"),
+                CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getAllCustomerOrderByNameDesc() {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.findAllByAgeGreaterThanOrderByName(-1),
+                CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getByAgeBetweenOrNameContainingIgnoreCase() {
+        return this.modelMapperUtil.mapAll(this.customerRepository
+                .findByAgeBetweenAndNameContainingIgnoreCase
+                        (30,50,"bur"),CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getAllCustomer() {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.customFindAll(),
+                CustomerDTO.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> getNameOrSurnameForCustomer(String name, String surname) {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.customByNameOrSurname(name,surname),
+                CustomerDTO.class);
     }
 
 

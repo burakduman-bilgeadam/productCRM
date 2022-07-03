@@ -66,7 +66,7 @@ public class CustomerController {
     }
     @GetMapping
     public List<CustomerDTO> getCustomerList(){
-        return this.customerService.getCustomerList();
+        return this.customerService.getAllCustomer();
     }
 
     // id ye göre customer veya product sorgulama
@@ -89,5 +89,38 @@ public class CustomerController {
     public List<CustomerDTO> getCustomerByName
             (@RequestParam(name = "name") String name){
         return this.customerService.getCustomerByName(name);
+    }
+
+    @GetMapping("/getByNameOrSurname")
+    public List<CustomerDTO> getCustomerByNameOrSurname(
+            @RequestParam(name="name") String name,
+            @RequestParam(name="surname")String surname
+    ){
+        return this.customerService.getNameOrSurnameForCustomer(name,surname);
+    }
+
+    @GetMapping("/distinctByName")
+    public List<CustomerDTO> getCustomerDistinctByName(
+            @RequestParam(name="name") String name
+    ){
+        return this.customerService.getDistinctCustomerByName(name);
+    }
+
+    @GetMapping("/greaterThan40")
+    public List<CustomerDTO> getCustomerGreaterThan40(){
+        return this.customerService.getGreaterThan40();
+    }
+    @GetMapping("/ageAndNameIC")
+    public List<CustomerDTO> getByAgeLessThanEqualAndNameIgnoreCase(){
+        return this.customerService.getByAgeLessThanEqualAndNameIgnoreCase();
+    }
+    //TODO: Hatalı Çalışıyor.
+    @GetMapping("/allCustomerOrderByName")
+    public List<CustomerDTO> getAllCustomerOrderByNameDesc(){
+        return this.customerService.getAllCustomerOrderByNameDesc();
+    }
+    @GetMapping("/ageOrNameContaining")
+    public List<CustomerDTO> getByAgeBetweenOrNameContainingIgnoreCase(){
+        return this.customerService.getByAgeBetweenOrNameContainingIgnoreCase();
     }
 }
