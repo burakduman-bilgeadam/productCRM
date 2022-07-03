@@ -22,6 +22,37 @@ public class CustomerController {
         return new ResponseEntity
                 ("Başarılı",HttpStatus.CREATED);
     }
+
+    /*
+    [
+    {
+    "name":"Can",
+    "surname":"Kemal",
+    "age":40
+    },{
+    "name":"Can",
+    "surname":"Kemal",
+    "age":40
+},{
+    "name":"Can",
+    "surname":"Kemal",
+    "age":40
+},{
+    "name":"Can",
+    "surname":"Kemal",
+    "age":40
+}
+]
+     */
+    // customer veya product toplu kayıt ekleme endpointi yazılacak.
+    @PostMapping("addList")
+    public ResponseEntity addListCustomer(@RequestBody List<CustomerDTO>
+                                                  customerDTOList){
+        this.customerService.addListCustomer(customerDTOList);
+        return new ResponseEntity
+                ("Başarılı",HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable Long id){
         this.customerService.deleteCustomer(id);
@@ -36,5 +67,20 @@ public class CustomerController {
     @GetMapping
     public List<CustomerDTO> getCustomerList(){
         return this.customerService.getCustomerList();
+    }
+
+    // id ye göre customer veya product sorgulama
+    // eğer id yanlış girilmişse bu kayıt yoksa
+    // hata dönmenizi istiyorum.
+    @GetMapping("findById")
+    public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam(value = "id")
+                                       Long id){
+        return customerService.getCustomerById(id);
+    }
+    // tablodaki toplam kayıt sayısı döndüren methodları yazınız.
+    @GetMapping("allCount")
+    public ResponseEntity<Long> getAllCountInCustomer(){
+        return new ResponseEntity<>
+                (customerService.getAllCountInCustomer(),HttpStatus.OK);
     }
 }
