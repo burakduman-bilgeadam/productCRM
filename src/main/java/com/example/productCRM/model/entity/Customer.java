@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+//customerları yaşa göre gruplama yapınız.
+@NamedQuery(name="Customer.groupByAge"
+        ,query = "select c.age,count(c) from Customer c group by c.age"
+)
 @NamedQuery(name="Customer.countCustomer",query = "select count(c) from Customer c")
 @Table(name="customer")
 public class Customer extends BaseEntity {

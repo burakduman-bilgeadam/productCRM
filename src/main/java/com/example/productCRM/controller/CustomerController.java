@@ -145,4 +145,16 @@ public class CustomerController {
     ){
         return customerService.getCustomersFilterByName(name);
     }
+
+    @GetMapping("/groupByAge")
+    public List<Object> groupByAge(){
+        return customerService.groupByAge();
+    }
+
+    @GetMapping("/groupByAgeFilterByName/{name}")
+    public List<Object> groupByAgeFilterByName(
+            @PathVariable("name") String name
+    ){
+        return customerService.groupByAgeFilterByNameWithHql(name);
+    }
 }

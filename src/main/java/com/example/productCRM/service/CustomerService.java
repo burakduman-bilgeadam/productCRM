@@ -32,4 +32,8 @@ public interface CustomerService {
 
     List<CustomerDTO> getCustomersByAge(Integer start_age,Integer end_age);
     List<CustomerDTO> getCustomersFilterByName(String name);
+
+    List<Object> groupByAge();
+
+    List<Object> groupByAgeFilterByNameWithHql(String name);
  }

@@ -75,7 +75,7 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public long getAllCountInCustomer() {
-        return this.customerRepository.countCustomer();
+        return this.customerRepository.findCountWithoutHql();
     }
 
     @Override
@@ -181,5 +181,16 @@ public class CustomerServiceImp implements CustomerService {
         return this.modelMapperUtil.mapAll(
                 this.customerRepository.findByNameContainingIgnoreCaseOrderByNameDesc(name),
                 CustomerDTO.class);
+    }
+
+    @Override
+    public List<Object> groupByAge() {
+        return this.customerRepository.groupByAgeWithoutHql();
+    }
+
+    @Override
+    public List<Object> groupByAgeFilterByNameWithHql(String name) {
+        return customerRepository.groupByAgeFilterByNameWithoutHql
+                ('%'+name+'%');
     }
 }

@@ -48,4 +48,26 @@ public interface CustomerRepository
     List<Customer> findByNameContainingIgnoreCaseOrderByNameDesc(String name);
 
     Long countCustomer();
+
+    // age count
+    List<Object> groupByAge();
+
+    @Query("select count(c) from Customer c")
+    Long findCountWithHql();
+
+    @Query(value = "select count(*) from Customer",nativeQuery = true)
+    Long findCountWithoutHql();
+
+    @Query("select c.age,count(c) from Customer c group by c.age")
+    List<Object> groupByAgeWithHql();
+    @Query(value = "select c.birth_date,count(c) from Customer c group by c.birth_date"
+            ,nativeQuery = true)
+    List<Object> groupByAgeWithoutHql();
+
+    @Query(value = "select c.birth_date,count(c) from " +
+            "(select * from Customer c1 " +
+            " where  lower(c1.name) like lower(:name))" +
+            " c group by c.birth_date",nativeQuery = true)
+    List<Object> groupByAgeFilterByNameWithoutHql
+            (@Param("name") String name);
 }
