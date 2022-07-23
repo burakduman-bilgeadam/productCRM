@@ -75,7 +75,7 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public long getAllCountInCustomer() {
-        return this.customerRepository.count();
+        return this.customerRepository.countCustomer();
     }
 
     @Override
@@ -151,7 +151,7 @@ public class CustomerServiceImp implements CustomerService {
     @Transactional(readOnly = true)
     public List<CustomerDTO> getAllCustomer() {
         return this.modelMapperUtil.mapAll(
-                this.customerRepository.customFindAll(),
+                this.customerRepository.findAllByOrderByNameDesc(),
                 CustomerDTO.class);
     }
 
@@ -163,5 +163,23 @@ public class CustomerServiceImp implements CustomerService {
                 CustomerDTO.class);
     }
 
+    @Override
+    public List<CustomerDTO>
+    getCustomersByNameOrSurname(String name, String surname) {
+        return this.modelMapperUtil.mapAll(this.customerRepository.findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase
+                (name,surname),CustomerDTO.class);
+    }
 
+    @Override
+    public List<CustomerDTO> getCustomersByAge(Integer start_age, Integer end_age) {
+        return  this.modelMapperUtil.mapAll(
+                customerRepository.findByAgeBetween(start_age+1,end_age-1),CustomerDTO.class);
+    }
+
+    @Override
+    public List<CustomerDTO> getCustomersFilterByName(String name) {
+        return this.modelMapperUtil.mapAll(
+                this.customerRepository.findByNameContainingIgnoreCaseOrderByNameDesc(name),
+                CustomerDTO.class);
+    }
 }

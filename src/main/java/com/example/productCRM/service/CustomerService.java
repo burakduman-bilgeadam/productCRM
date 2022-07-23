@@ -27,4 +27,9 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
     List<CustomerDTO> getNameOrSurnameForCustomer
             (String name,String surname);
+    List<CustomerDTO> getCustomersByNameOrSurname
+            (String name,String surname);
+
+    List<CustomerDTO> getCustomersByAge(Integer start_age,Integer end_age);
+    List<CustomerDTO> getCustomersFilterByName(String name);
  }

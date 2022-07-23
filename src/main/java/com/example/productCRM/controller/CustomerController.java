@@ -123,4 +123,26 @@ public class CustomerController {
     public List<CustomerDTO> getByAgeBetweenOrNameContainingIgnoreCase(){
         return this.customerService.getByAgeBetweenOrNameContainingIgnoreCase();
     }
+
+    @GetMapping("/findNameOrSurname")
+    public List<CustomerDTO> getCustomersByNameOrSurname(
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "surname") String surname) {
+      return this.customerService.getCustomersByNameOrSurname(name,surname);
+    }
+
+    @GetMapping("/findByAge")
+    public List<CustomerDTO> getCustomersByAge(
+            @RequestParam(name="start_age") Integer start_age,
+            @RequestParam(name="end_age") Integer end_age
+    ){
+        return customerService.getCustomersByAge(start_age,end_age);
+    }
+
+    @GetMapping("/filterByName/{name}")
+    public List<CustomerDTO> getCustomersFilterByName(
+            @PathVariable(name = "name") String name
+    ){
+        return customerService.getCustomersFilterByName(name);
+    }
 }

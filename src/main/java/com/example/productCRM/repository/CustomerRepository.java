@@ -1,6 +1,7 @@
 package com.example.productCRM.repository;
 
 import com.example.productCRM.model.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +15,7 @@ import java.util.List;
 //
 @Repository
 public interface CustomerRepository
-        extends CrudRepository<Customer,Long> {
+        extends JpaRepository<Customer,Long> {
     List<Customer> findByName(String name);
     //select * from customer where name='Can' or surname="Duman"
     List<Customer> findByNameOrSurname(String name,String surname);
@@ -32,8 +33,19 @@ public interface CustomerRepository
     @Query(value = "Select c.name from Customer c order by c.name")
     List<Customer> customFindAll();
 
+    List<Customer> findAllByOrderByNameDesc();
+
     @Query(value = "Select c from Customer c" +
             " where c.name=:name or c.surname=:surname order by c.name")
     List<Customer> customByNameOrSurname
             (@Param("name") String name,@Param("surname") String surname);
+
+    List<Customer> findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase
+            (String name, String surname);
+
+    List<Customer> findByAgeBetween(Integer start_age, Integer end_age);
+
+    List<Customer> findByNameContainingIgnoreCaseOrderByNameDesc(String name);
+
+    Long countCustomer();
 }

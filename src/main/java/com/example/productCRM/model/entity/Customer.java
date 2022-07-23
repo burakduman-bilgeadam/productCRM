@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name="Customer.countCustomer",query = "select count(c) from Customer c")
 @Table(name="customer")
 public class Customer extends BaseEntity {
     /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
