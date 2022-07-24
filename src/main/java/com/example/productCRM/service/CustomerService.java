@@ -1,5 +1,6 @@
 package com.example.productCRM.service;
 
+import com.example.productCRM.model.dto.CustomerAgeDTO;
 import com.example.productCRM.model.dto.CustomerDTO;
 import com.example.productCRM.model.entity.Customer;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public interface CustomerService {
     List<CustomerDTO> getCustomersByAge(Integer start_age,Integer end_age);
     List<CustomerDTO> getCustomersFilterByName(String name);
 
-    List<Object> groupByAge();
+    List<CustomerAgeDTO> groupByAge();
 
     List<Object> groupByAgeFilterByNameWithHql(String name);
  }

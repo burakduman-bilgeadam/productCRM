@@ -1,5 +1,6 @@
 package com.example.productCRM.serviceimp;
 
+import com.example.productCRM.model.dto.CustomerAgeDTO;
 import com.example.productCRM.model.dto.CustomerDTO;
 import com.example.productCRM.model.entity.Customer;
 import com.example.productCRM.repository.CustomerRepository;
@@ -184,8 +185,8 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public List<Object> groupByAge() {
-        return this.customerRepository.groupByAgeWithoutHql();
+    public List<CustomerAgeDTO> groupByAge() {
+        return this.customerRepository.findGroupByAge();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.productCRM.model.entity;
 
+import com.example.productCRM.model.dto.CustomerAgeDTO;
 import com.fasterxml.jackson.databind.ser.Serializers;
 
 import javax.persistence.*;
@@ -7,8 +8,20 @@ import java.util.Date;
 
 @Entity
 //customerları yaşa göre gruplama yapınız.
-@NamedQuery(name="Customer.groupByAge"
-        ,query = "select c.age,count(c) from Customer c group by c.age"
+@NamedNativeQuery(name="Customer.groupByAge"
+        ,query = "select c.birth_date as AGE,count(c) as COUNT " +
+        "from Customer c group by c.birth_date",
+        resultSetMapping = "groupByAgeDTO"
+)
+@SqlResultSetMapping(
+        name = "groupByAgeDTO",
+        classes = @ConstructorResult(
+                targetClass = CustomerAgeDTO.class,
+                columns = {
+                        @ColumnResult(name = "age", type = Integer.class),
+                        @ColumnResult(name = "count", type = Long.class)
+                }
+        )
 )
 @NamedQuery(name="Customer.countCustomer",query = "select count(c) from Customer c")
 @Table(name="customer")

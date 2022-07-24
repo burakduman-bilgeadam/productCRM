@@ -1,5 +1,6 @@
 package com.example.productCRM.controller;
 
+import com.example.productCRM.model.dto.CustomerAgeDTO;
 import com.example.productCRM.model.dto.CustomerDTO;
 import com.example.productCRM.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,7 +148,7 @@ public class CustomerController {
     }
 
     @GetMapping("/groupByAge")
-    public List<Object> groupByAge(){
+    public List<CustomerAgeDTO> groupByAge(){
         return customerService.groupByAge();
     }
 

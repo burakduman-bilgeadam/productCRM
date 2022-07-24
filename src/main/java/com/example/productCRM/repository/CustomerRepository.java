@@ -1,5 +1,6 @@
 package com.example.productCRM.repository;
 
+import com.example.productCRM.model.dto.CustomerAgeDTO;
 import com.example.productCRM.model.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -50,7 +51,8 @@ public interface CustomerRepository
     Long countCustomer();
 
     // age count
-    List<Object> groupByAge();
+    @Query(name = "Customer.groupByAge", nativeQuery = true)
+    List<CustomerAgeDTO> findGroupByAge();
 
     @Query("select count(c) from Customer c")
     Long findCountWithHql();
