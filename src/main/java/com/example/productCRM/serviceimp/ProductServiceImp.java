@@ -58,4 +58,24 @@ public class ProductServiceImp implements ProductService {
         }
         return productDTOs;
     }
+
+    @Override
+    public Long sumProducts() {
+        return this.productRepository.sumProducts();
+    }
+
+    @Override
+    public Long sumProductsFilterByName(String name) {
+        return this.productRepository.sumProductsFilterByName(name);
+    }
+
+    @Override
+    public List<Object> filterPrice(Long price) {
+        return this.productRepository.filterPrice(price.doubleValue());
+    }
+
+    @Override
+    public Double averageProduct() {
+        return this.productRepository.averageProduct();
+    }
 }

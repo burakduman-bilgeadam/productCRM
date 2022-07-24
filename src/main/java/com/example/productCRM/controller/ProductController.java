@@ -42,4 +42,32 @@ public class ProductController {
                this.productService.getProductList());
     }
 
+    @GetMapping("/sumProducts")
+    public ResponseEntity<Long> sumProducts(){
+        return ResponseEntity.ok(
+                this.productService.sumProducts());
+    }
+
+    @GetMapping("/sumProductsFilterByName/{name}")
+    public ResponseEntity<Long> sumProductsFilterByName(
+            @PathVariable(name="name") String name
+    ){
+        return ResponseEntity.ok(
+                this.productService.sumProductsFilterByName(name));
+    }
+
+    @GetMapping("/filterPrice")
+    public ResponseEntity<List<Object>> filterPrice(
+            @RequestParam(name="price") Long price
+    ){
+        return ResponseEntity.ok(
+                this.productService.filterPrice(price));
+    }
+
+    @GetMapping("/average")
+    public ResponseEntity<Double>averageProduct(){
+        return ResponseEntity.ok(
+                this.productService.averageProduct()
+        );
+    }
 }

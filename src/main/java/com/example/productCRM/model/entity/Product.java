@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedNativeQuery(name="Product.filterPrice"
+, query ="select p from Product p where p.price>:price")
+@NamedQuery(name="Product.averageProduct",
+        query = "select avg(p.price) from Product p")
 @Table(name="product")
 public class Product extends BaseEntity{
 
@@ -11,6 +15,10 @@ public class Product extends BaseEntity{
     private String name;
     @Column(name="price")
     private Double price;
+
+    @ManyToOne
+    @JoinColumn(name="sale_id")
+    private Sale sale;
 
     public String getName() {
         return name;

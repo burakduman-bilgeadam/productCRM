@@ -9,4 +9,12 @@ public interface ProductService {
     void deleteProduct(Long id);
     void updateProduct(ProductDTO productDTO);
     List<ProductDTO> getProductList();
+
+    Long sumProducts();
+
+    Long sumProductsFilterByName(String name);
+
+    List<Object> filterPrice(Long price);
+
+    Double averageProduct();
 }
