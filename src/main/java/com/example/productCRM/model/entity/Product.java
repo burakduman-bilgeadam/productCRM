@@ -21,7 +21,7 @@ public class Product extends BaseEntity{
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name="sale_id")
+    @JoinColumn(name="sale_id", insertable = false, updatable = false)
     private Sale sale;
 
     public String getName() {
@@ -38,5 +38,13 @@ public class Product extends BaseEntity{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 }

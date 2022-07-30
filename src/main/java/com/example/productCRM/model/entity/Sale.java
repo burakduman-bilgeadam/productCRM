@@ -12,8 +12,9 @@ public class Sale extends BaseEntity {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "sale")
-    private List<Product> product;
+    @OneToMany
+    @JoinColumn(name="sale_id")
+    private List<Product> products;
 
     public Customer getCustomer() {
         return customer;
@@ -23,11 +24,11 @@ public class Sale extends BaseEntity {
         this.customer = customer;
     }
 
-    public List<Product> getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
