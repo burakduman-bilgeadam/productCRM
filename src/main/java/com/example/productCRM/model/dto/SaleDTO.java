@@ -1,8 +1,16 @@
 package com.example.productCRM.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+
 public class SaleDTO {
+    @JsonProperty(value = "sale_id")
     private Long id;
-    private ProductDTO productDTO;
+    @JsonProperty(value = "products")
+    private List<ProductDTO> productDTO;
+    @JsonProperty(value = "customer")
     private CustomerDTO customerDTO;
 
     public Long getId() {
@@ -13,23 +21,23 @@ public class SaleDTO {
         this.id = id;
     }
 
-    public ProductDTO getProduct() {
+    public List<ProductDTO> getProductDTO() {
         return productDTO;
     }
 
-    public void setProduct(ProductDTO productDTO) {
+    public void setProductDTO(List<ProductDTO> productDTO) {
         this.productDTO = productDTO;
     }
 
-    public CustomerDTO getCustomer() {
+    public CustomerDTO getCustomerDTO() {
         return customerDTO;
     }
 
-    public void setCustomer(CustomerDTO customerDTO) {
+    public void setCustomerDTO(CustomerDTO customerDTO) {
         this.customerDTO = customerDTO;
     }
-
-    public SaleDTO(Long id, ProductDTO productDTO, CustomerDTO customerDTO) {
+    public SaleDTO(){};
+    public SaleDTO(Long id, List<ProductDTO> productDTO, CustomerDTO customerDTO) {
         this.id = id;
         this.productDTO = productDTO;
         this.customerDTO = customerDTO;

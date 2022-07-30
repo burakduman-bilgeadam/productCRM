@@ -1,5 +1,7 @@
 package com.example.productCRM.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 //electronic devices
@@ -20,6 +22,7 @@ public class Product extends BaseEntity{
     @Column(name="price")
     private Double price;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="sale_id", insertable = false, updatable = false)
     private Sale sale;

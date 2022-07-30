@@ -2,6 +2,7 @@ package com.example.productCRM.controller;
 
 import com.example.productCRM.model.dto.SaleDTO;
 import com.example.productCRM.model.dto.SaleRequestDTO;
+import com.example.productCRM.model.entity.Sale;
 import com.example.productCRM.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -10,6 +10,7 @@ import com.example.productCRM.repository.CustomerRepository;
 import com.example.productCRM.repository.ProductRepository;
 import com.example.productCRM.repository.SaleRepository;
 import com.example.productCRM.service.SaleService;
+import com.example.productCRM.utils.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +26,8 @@ public class SaleServiceImp implements SaleService {
     private ProductRepository productRepository;
     @Autowired
     private SaleRepository saleRepository;
-
-    private List<SaleDTO> saleDTOS = new ArrayList<>();
-
+    @Autowired
+    private ModelMapperUtil modelMapperUtil;
     @Transactional
     @Override
     public void addSale(Long customerId, List<Long> productId,Long saleId) {
@@ -42,23 +42,29 @@ public class SaleServiceImp implements SaleService {
 
     }
 
+    @Transactional
     @Override
     public void deleteSale(Long id) {
-        SaleDTO s = this.saleDTOS.stream()
-                .filter(saleDTO -> saleDTO.getId() == id)
-                .findFirst().orElse(null);
-        if(s!=null){
-            this.saleDTOS.remove(s);
-        }
+        this.saleRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
-    public void updateSale(Long customerId, List<Long> productId,Long saleId) {
-
+    public void updateSale(Long customerId, List<Long> productsId,Long saleId) {
+        Sale sale = saleRepository.findById(saleId).orElse(new Sale());
+        Customer customer = customerRepository
+                .findById(customerId).orElse(null);
+        sale.setCustomer(customer);
+        List<Product> products = (List<Product>)productRepository
+                .findAllById(productsId);
+        sale.setProducts(products);
+        saleRepository.save(sale);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<SaleDTO> getSales() {
-        return this.saleDTOS;
+        return modelMapperUtil
+                .mapAll(saleRepository.findAll(),SaleDTO.class);
     }
 }
