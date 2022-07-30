@@ -1,9 +1,11 @@
 package com.example.productCRM.model.dto;
 
+import java.util.List;
+
 public class SaleRequestDTO {
     private Long saleId;
     private Long customerId;
-    private Long productId;
+    private List<Long> productsId;
 
     public Long getCustomerId() {
         return customerId;
@@ -13,12 +15,12 @@ public class SaleRequestDTO {
         this.customerId = customerId;
     }
 
-    public Long getProductId() {
-        return productId;
+    public List<Long> getProductsId() {
+        return productsId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductsId(List<Long> productsId) {
+        this.productsId = productsId;
     }
 
     public Long getSaleId() {

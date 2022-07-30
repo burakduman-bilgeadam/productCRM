@@ -18,7 +18,7 @@ public class SaleController {
     @PostMapping("/add")
     public ResponseEntity addSale(@RequestBody SaleRequestDTO saleRequestDTO){
         this.saleService.addSale(saleRequestDTO.getCustomerId(),
-                saleRequestDTO.getProductId(),
+                saleRequestDTO.getProductsId(),
                 saleRequestDTO.getSaleId());
         return new ResponseEntity("Başarılı Kayıt",
                 HttpStatus.CREATED);
@@ -33,7 +33,7 @@ public class SaleController {
     @PutMapping("/update")
     public ResponseEntity updateSale(@RequestBody SaleRequestDTO saleRequestDTO){
         this.saleService.updateSale(saleRequestDTO.getCustomerId()
-                ,saleRequestDTO.getProductId(),saleRequestDTO.getSaleId());
+                ,saleRequestDTO.getProductsId(),saleRequestDTO.getSaleId());
         return new ResponseEntity("Başarılı Güncelleme",HttpStatus.CREATED);
     }
 

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface SaleService {
 
-    void addSale(Long customerId, Long productId,Long saleId);
+    void addSale(Long customerId, List<Long> productsId,Long saleId);
     void deleteSale(Long id);
-    void updateSale(Long customerId, Long productId,Long saleId);
+    void updateSale(Long customerId, List<Long> productsId,Long saleId);
     List<SaleDTO> getSales();
 }

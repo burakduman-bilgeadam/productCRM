@@ -40,6 +40,12 @@ public class CustomerServiceImp implements CustomerService {
     @Transactional
     public void updateCustomer(CustomerDTO customerDTO){
         //TODO: ilk kayıtı bulalım
+        /*
+        ID olmasına rağmen güncellemezse?
+        Repository e gidip id ye göre filtre çekip
+        Datayı alıp ön yüzden gelen datalarla setleyip
+        tekrar kaydetme yapmınız gerekiyor.
+        */
         Customer customer = new Customer();
         customer.setAge(customerDTO.getAge());
         customer.setName(customerDTO.getName());
