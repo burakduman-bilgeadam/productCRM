@@ -70,7 +70,7 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public List<Object> filterPrice(Long price) {
+    public List<Product> filterPrice(Long price) {
         return this.productRepository.filterPrice(price.doubleValue());
     }
 

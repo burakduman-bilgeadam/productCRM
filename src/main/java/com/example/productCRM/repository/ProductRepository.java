@@ -19,7 +19,8 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
     ,nativeQuery = true)
     Long sumProductsFilterByName(String name);
 
-    List<Object> filterPrice(@Param(value = "price") Double price);
+    @Query(nativeQuery = true)
+    List<Product> filterPrice(@Param(value = "price") Double price);
 
     Double averageProduct();
 }

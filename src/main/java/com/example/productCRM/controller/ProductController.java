@@ -1,6 +1,7 @@
 package com.example.productCRM.controller;
 
 import com.example.productCRM.model.dto.ProductDTO;
+import com.example.productCRM.model.entity.Product;
 import com.example.productCRM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/filterPrice")
-    public ResponseEntity<List<Object>> filterPrice(
+    public ResponseEntity<List<Product>> filterPrice(
             @RequestParam(name="price") Long price
     ){
         return ResponseEntity.ok(

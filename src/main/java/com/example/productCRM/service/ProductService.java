@@ -1,6 +1,7 @@
 package com.example.productCRM.service;
 
 import com.example.productCRM.model.dto.ProductDTO;
+import com.example.productCRM.model.entity.Product;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ProductService {
 
     Long sumProductsFilterByName(String name);
 
-    List<Object> filterPrice(Long price);
+    List<Product> filterPrice(Long price);
 
     Double averageProduct();
 }

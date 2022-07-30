@@ -2,10 +2,14 @@ package com.example.productCRM.model.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+//electronic devices
+//dress
+//furniture
 
 @Entity
 @NamedNativeQuery(name="Product.filterPrice"
-, query ="select p from Product p where p.price>:price")
+, query ="select p.* from Product p where p.price>:price"
+        ,resultClass = Product.class)
 @NamedQuery(name="Product.averageProduct",
         query = "select avg(p.price) from Product p")
 @Table(name="product")
